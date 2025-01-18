@@ -21,13 +21,13 @@ jobs:
           cat jfn.rb |
             version="${version}" macos_sha256="${macos_sha256}" linux_sha256="${linux_sha256}" jfn '
               $.replace(
-                /(?<=version ")[^"]*(?=")/,
+                /(?<=version\s+")[^"]*(?=")/,
                 $version,
               ).replace(
-                /(?<=macos.tar.gz"\s+sha256 ")[^"]*(?=")/,
+                /(?<=macos.tar.gz"\s+sha256\s+")[^"]*(?=")/,
                 $macos_sha256,
               ).replace(
-                /(?<=linux.tar.gz"\s+sha256 ")[^"]*(?=")/,
+                /(?<=linux.tar.gz"\s+sha256\s+")[^"]*(?=")/,
                 $linux_sha256,
               )
             ' > jfn.rb.new
