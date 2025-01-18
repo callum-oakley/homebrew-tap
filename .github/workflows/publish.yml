@@ -32,5 +32,7 @@ jobs:
               )
             ' > jfn.rb.new
           mv jfn.rb.new jfn.rb
+      - run: git config --global user.name 'Callum Oakley'
+      - run: git config --global user.email 'hello@callumoakley.net'
       - run: git commit -am 'jfn ${{ github.event.client_payload.version }}'
       - run: git push
