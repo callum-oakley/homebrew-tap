@@ -12,11 +12,11 @@ jobs:
           version=${{ github.event.client_payload.version }}
           macos_sha256="$(
             curl -sfL "https://github.com/callum-oakley/jfn/releases/download/v${version}/jfn-${version}-macos.tar.gz" |
-              shasum -a 256 | jfn '$.match(/[0-9a-f]{64}/)[0]'
+              shasum -a 256 | jfn '$.match(/[0-9a-f]{64}/)'
           )"
           linux_sha256="$(
             curl -sfL "https://github.com/callum-oakley/jfn/releases/download/v${version}/jfn-${version}-linux.tar.gz" |
-              shasum -a 256 | jfn '$.match(/[0-9a-f]{64}/)[0]'
+              shasum -a 256 | jfn '$.match(/[0-9a-f]{64}/)'
           )"
           cat jfn.rb |
             version="${version}" macos_sha256="${macos_sha256}" linux_sha256="${linux_sha256}" jfn '
