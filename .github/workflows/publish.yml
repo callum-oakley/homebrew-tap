@@ -30,6 +30,7 @@ jobs:
                 /(?<=linux.tar.gz"\s+sha256 ")[^"]*(?=")/,
                 $linux_sha256,
               )
-            ' | sponge jfn.rb
+            ' > jfn.rb.new
+          mv jfn.rb.new jfn.rb
       - run: git commit -am 'jfn ${{ github.event.client_payload.version }}'
       - run: git push
