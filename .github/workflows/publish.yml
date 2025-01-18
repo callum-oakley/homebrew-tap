@@ -10,12 +10,13 @@ jobs:
       - run: cargo install jfn
       - run: |
           version=${{ github.event.client_payload.version }}
+          repo='https://github.com/callum-oakley/jfn'
           macos_sha256="$(
-            curl -sfL "https://github.com/callum-oakley/jfn/releases/download/v${version}/jfn-${version}-macos.tar.gz" |
+            curl -sfL "${repo}/releases/download/v${version}/jfn-${version}-macos.tar.gz" |
               shasum -a 256 | jfn '$.match(/[0-9a-f]{64}/)'
           )"
           linux_sha256="$(
-            curl -sfL "https://github.com/callum-oakley/jfn/releases/download/v${version}/jfn-${version}-linux.tar.gz" |
+            curl -sfL "${repo}/releases/download/v${version}/jfn-${version}-linux.tar.gz" |
               shasum -a 256 | jfn '$.match(/[0-9a-f]{64}/)'
           )"
           cat jfn.rb |
