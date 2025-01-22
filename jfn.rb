@@ -1,14 +1,14 @@
 class Jfn < Formula
-  version "2.0.0"
+  version "2.0.1"
   desc "A tool for evaluating a JavaScript function and printing the result."
   homepage "https://github.com/callum-oakley/jfn"
   
   if OS.mac?
     url "https://github.com/callum-oakley/jfn/releases/download/v#{version}/jfn-#{version}-macos.tar.gz"
-    sha256 "7c91e8f5d7a74ccd5b68a2a078d33aadb014a292f8c03740c1f123449e06113b"
+    sha256 "aee401555a942b3bcf8ad695f99e43daaa4d96aac05c746ec34389d32c514b69"
   elsif OS.linux?
     url "https://github.com/callum-oakley/jfn/releases/download/v#{version}/jfn-#{version}-linux.tar.gz"
-    sha256 "8e4c588561e595586acc73caa2c9f8ef1795c9fa3ad16af7bf3acb1d164a1651"
+    sha256 "62884f45e4a2252d885506a0317cd3002ce58486cf2d58d24995ab6b73f53966"
   end
   
   def install
