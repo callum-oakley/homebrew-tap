@@ -3,35 +3,40 @@ on:
     types: [publish]
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-      - run: cargo install jfn
+      - run: brew install callum-oakley/tap/jfn
       - run: |
-          repo='https://github.com/callum-oakley/jfn'
-          version=${{ github.event.client_payload.version }}
+          export name='${{ github.event.client_payload.name }}'
+          export version='${{ github.event.client_payload.version }}'
+          export description='${{ github.event.client_payload.description }}'
+          export repo="https://github.com/callum-oakley/${name}"
           for os in {macos,linux}; do            
-            "${os}_sha256=$(
-              curl -sfL "${repo}/releases/download/v${version}/jfn-${version}-${os}.tar.gz" |
+            export "${os}_sha256=$(
+              curl -sfL "${repo}/releases/download/v${version}/${name}-${version}-${os}.tar.gz" |
                 shasum -a 256 | jfn '$.match(/[0-9a-f]{64}/)'
             )"
           done
-          cat jfn.rb |
-            version="${version}" macos_sha256="${macos_sha256}" linux_sha256="${linux_sha256}" jfn '
-              $.replace(
-                /(?<=version\s+")[^"]*(?=")/,
-                $version,
-              ).replace(
-                /(?<=macos.tar.gz"\s+sha256\s+")[^"]*(?=")/,
-                $macos_sha256,
-              ).replace(
-                /(?<=linux.tar.gz"\s+sha256\s+")[^"]*(?=")/,
-                $linux_sha256,
-              )
-            ' > jfn.rb.new
-          mv jfn.rb.new jfn.rb
-      - run: git config --global user.name 'Callum Oakley'
-      - run: git config --global user.email 'hello@callumoakley.net'
-      - run: git commit -am 'jfn ${{ github.event.client_payload.version }}'
-      - run: git push
+          cat template | jfn '
+            $.replaceAll(
+              "{{class}}", $name.charAt(0).toUpperCase() + $name.substring(1),
+            ).replaceAll(
+              "{{version}}", $version,
+            ).replaceAll(
+              "{{desc}}", $description,
+            ).replaceAll(
+              "{{homepage}}", $repo,
+            ).replaceAll(
+              "{{name}}", $name,
+            ).replaceAll(
+              "{{macos_sha256}}", $macos_sha256,
+            ).replaceAll(
+              "{{linux_sha256}}", $linux_sha256,
+            )
+          ' > "${name}.rb"
+          git config --global user.name 'Callum Oakley'
+          git config --global user.email 'hello@callumoakley.net'
+          git add .
+          git commit -m "${name} ${version}"
+          git push

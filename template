@@ -1,0 +1,17 @@
+class {{class}} < Formula
+  version "{{version}}"
+  desc "{{desc}}"
+  homepage "{{homepage}}"
+  
+  if OS.mac?
+    url "#{homepage}/releases/download/v#{version}/{{name}}-#{version}-macos.tar.gz"
+    sha256 "{{macos_sha256}}"
+  elsif OS.linux?
+    url "#{homepage}/releases/download/v#{version}/{{name}}-#{version}-linux.tar.gz"
+    sha256 "{{linux_sha256}}"
+  end
+  
+  def install
+    bin.install "{{name}}"
+  end
+end
