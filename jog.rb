@@ -1,14 +1,14 @@
 class Jog < Formula
-  version "0.1.4"
+  version "0.1.5"
   desc "A task runner with no syntax."
   homepage "https://github.com/callum-oakley/jog"
   
   if OS.mac?
     url "#{homepage}/releases/download/v#{version}/jog-#{version}-macos.tar.gz"
-    sha256 "5a5001a8126e618ed9a07418935d2e869b0e5f43c189024f9c500b2607a06a09"
+    sha256 "d6d1ca768dc74cc897536e3797938b9dbccebc605d0ed22c4d5912e3ddbe4021"
   elsif OS.linux?
     url "#{homepage}/releases/download/v#{version}/jog-#{version}-linux.tar.gz"
-    sha256 "bc226935f11ea4e4352b3186dac5deaee2f98030ca98954dd9a56f46b2c59edf"
+    sha256 "5538850503aba16c740a5af0e6d061537677633ac38e2fb5a780e1c14833ff18"
   end
   
   def install
