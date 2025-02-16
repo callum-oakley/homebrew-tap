@@ -6,7 +6,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - run: brew install callum-oakley/tap/jfn
+      - run: brew install callum-oakley/tap/jsq
       - run: |
           export name='${{ github.event.client_payload.name }}'
           export version='${{ github.event.client_payload.version }}'
@@ -15,10 +15,10 @@ jobs:
           for os in {macos,linux}; do            
             export "${os}_sha256=$(
               curl -sfL "${repo}/releases/download/v${version}/${name}-${version}-${os}.tar.gz" |
-                shasum -a 256 | jfn '$.match(/[0-9a-f]{64}/)'
+                shasum -a 256 | jsq '$.match(/[0-9a-f]{64}/)'
             )"
           done
-          cat template | jfn '
+          cat template | jsq '
             $.replaceAll(
               "{{class}}", $name.charAt(0).toUpperCase() + $name.substring(1),
             ).replaceAll(
