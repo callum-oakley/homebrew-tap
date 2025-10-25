@@ -11,6 +11,7 @@ jobs:
           export name='${{ github.event.client_payload.name }}'
           export version='${{ github.event.client_payload.version }}'
           export description='${{ github.event.client_payload.description }}'
+          export depends_on='${{ github.event.client_payload.depends_on }}'
           export repo="https://github.com/callum-oakley/${name}"
           for os in {macos,linux}; do            
             export "${os}_sha256=$(
@@ -33,6 +34,9 @@ jobs:
               "{{macos_sha256}}", $macos_sha256,
             ).replaceAll(
               "{{linux_sha256}}", $linux_sha256,
+            ).replaceAll(
+              "{{depends_on}}",
+              $depends_on ? $depends_on.split(",").map(a => `\n  depends_on "${a}"`).join() : "",
             )
           ' > "${name}.rb"
           git config --global user.name 'Callum Oakley'

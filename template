@@ -1,7 +1,7 @@
 class {{class}} < Formula
   version "{{version}}"
   desc "{{desc}}"
-  homepage "{{homepage}}"
+  homepage "{{homepage}}"{{depends_on}}
   
   if OS.mac?
     url "#{homepage}/releases/download/v#{version}/{{name}}-#{version}-macos.tar.gz"
