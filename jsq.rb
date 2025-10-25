@@ -1,25 +1,15 @@
 class Jsq < Formula
-  version "4.1.0"
+  version "4.0.0"
   desc "A tool for evaluating a JavaScript function and printing the result."
   homepage "https://github.com/callum-oakley/jsq"
   depends_on "deno"
   
   if OS.mac?
     url "#{homepage}/releases/download/v#{version}/jsq-#{version}-macos.tar.gz"
-    sha256 "[
-  "bc40e7309e820befadedf24af2c04abf513b8535be5f99efa6dc27733f458a02",
-  index: 0,
-  input: "bc40e7309e820befadedf24af2c04abf513b8535be5f99efa6dc27733f458a02  -\n",
-  groups: undefined
-]"
+    sha256 "a2f06f2e390afed2c6af79328daa00f362f5965067bf6a760d8eca3867fba51c"
   elsif OS.linux?
     url "#{homepage}/releases/download/v#{version}/jsq-#{version}-linux.tar.gz"
-    sha256 "[
-  "8bfa75c4f7631df5616b4e850c956f63cf95555e8ce77e5e53f92052837d00bb",
-  index: 0,
-  input: "8bfa75c4f7631df5616b4e850c956f63cf95555e8ce77e5e53f92052837d00bb  -\n",
-  groups: undefined
-]"
+    sha256 "4528c6cc56f6f9cdddf63d1b0f967766d67166991f8240eb4b7396bdd6479080"
   end
   
   def install
