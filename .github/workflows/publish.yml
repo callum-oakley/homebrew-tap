@@ -16,7 +16,7 @@ jobs:
           for os in {macos,linux}; do            
             export "${os}_sha256=$(
               curl -sfL "${repo}/releases/download/v${version}/${name}-${version}-${os}.tar.gz" |
-                shasum -a 256 | jsq '$.match(/[0-9a-f]{64}/)'
+                shasum -a 256 | jsq '$.match(/[0-9a-f]{64}/)[0]'
             )"
           done
           cat template | jsq '
